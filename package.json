@@ -1,0 +1,29 @@
+{
+  "name": "hometask",
+  "version": "1.0.0",
+  "description": "\"# HomeTasks\"",
+  "main": "search.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sh4hrukh/HomeTasks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sh4hrukh/HomeTasks/issues"
+  },
+  "homepage": "https://github.com/sh4hrukh/HomeTasks#readme",
+  "dependencies": {
+    "karma-cli": "^2.0.0",
+    "karma-phantomjs2-launcher": "^0.5.0"
+  },
+  "devDependencies": {
+    "jasmine-core": "^3.6.0",
+    "karma": "^6.1.0",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^4.0.1"
+  }
+}

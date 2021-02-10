@@ -9,9 +9,14 @@ document.body.replaceChild(mainWrapperDiv, document.body.children[0]);
 contentWrapperDiv = document.createElement("div");
 contentWrapperDiv.setAttribute("class", "contentWrapperDiv");
 const searchBar = document.querySelector(".searchBar");
+searchBar.addEventListener("keydown", function (e) {
+  if (e.keyCode === 13) {  
+      searchFunction();
+  }
+});
 const searchButton = document.querySelector(".searchButton");
 let result;
-const searchFunction = async () => {
+async function searchFunction() {
   let queryText = searchBar.value;
   console.log(queryText);
   await fetch(
@@ -21,6 +26,7 @@ const searchFunction = async () => {
     .then((response) => response.json())
     .then((data) => {
       result = data;
+      console.log(data);
       displayCards();
     })
     .catch((err) => {
@@ -43,8 +49,8 @@ function displayCards(oldAnimation,newAnimation) {
         p.parentNode.removeChild(p);})
     }
 
-  
-  for(let i= pageIndex*numberOfCards;i<pageIndex*numberOfCards+numberOfCards&&i<result.items.length;i++){
+  let maxPageIndex = pageIndex*numberOfCards+numberOfCards;
+  for(let i= pageIndex*numberOfCards;i<maxPageIndex && i<result.items.length;i++){
     let element = result.items[i];
     let card = document.createElement("div");
     card.setAttribute("class", "card");
@@ -71,11 +77,9 @@ function displayCards(oldAnimation,newAnimation) {
   }
   if(mainWrapperDiv.children[1]){
     mainWrapperDiv.replaceChild(contentWrapperDiv,mainWrapperDiv.children[1]);
-    
     displayNavDiv();
   }
   else{
-
     mainWrapperDiv.appendChild(contentWrapperDiv);
     displayNavDiv();
   }
@@ -120,9 +124,13 @@ function displayNavDiv(){
 
 function displayError(err){
   let p = document.createElement("p");
+  p.setAttribute("class","errorMessage");
   p.innerHTML = err;
   if(mainWrapperDiv.children[1])
   mainWrapperDiv.replaceChild(p,mainWrapperDiv.children[1]);
   else
   mainWrapperDiv.appendChild(p);
+  let navigationDiv = document.querySelector(".navigationDiv");
+  if(navigationDiv)
+    navigationDiv.parentNode.removeChild(navigationDiv);
 }
